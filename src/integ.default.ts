@@ -9,10 +9,6 @@ import {
 const app = new cdk.App();
 const stack = new cdk.Stack(app, "integ-ecs-fargate-task-fis");
 
-// Create a VPC and ECS Cluster for testing
-const vpc = new cdk.aws_ec2.Vpc(stack, "Vpc", { maxAzs: 2 });
-const cluster = new ecs.Cluster(stack, "Cluster", { vpc });
-
 // Create a Fargate Task Definition
 const taskDefinition = new ecs.FargateTaskDefinition(stack, "TaskDef", {
   memoryLimitMiB: 512,

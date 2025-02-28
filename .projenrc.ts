@@ -10,7 +10,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   repositoryUrl: "https://github.com/govisun/cdk-ecs-fargate-task-fis.git",
 
   deps: ["aws-cdk-lib", "@aws-cdk/integ-tests-alpha"],
-  devDeps: ["@aws-cdk/integ-tests-alpha"],
   description:
     "Helps update the ECS Task definition will all the prerequisites for fault injection with FIS",
   keywords: ["fis", "ecs fargate", "fault injection"],
