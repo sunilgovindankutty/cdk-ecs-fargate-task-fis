@@ -1,27 +1,27 @@
-import { IntegTest } from "@aws-cdk/integ-tests-alpha";
-import * as cdk from "aws-cdk-lib";
-import * as ecs from "aws-cdk-lib/aws-ecs";
+import { IntegTest } from '@aws-cdk/integ-tests-alpha';
+import * as cdk from 'aws-cdk-lib';
+import * as ecs from 'aws-cdk-lib/aws-ecs';
 import {
   FargateTaskDefinitionFaultInjection,
   FaultInjectionActionType,
-} from "./index";
+} from './index';
 
 const app = new cdk.App();
-const stack = new cdk.Stack(app, "integ-ecs-fargate-task-fis");
+const stack = new cdk.Stack(app, 'integ-ecs-fargate-task-fis');
 
 // Create a Fargate Task Definition
-const taskDefinition = new ecs.FargateTaskDefinition(stack, "TaskDef", {
+const taskDefinition = new ecs.FargateTaskDefinition(stack, 'TaskDef', {
   memoryLimitMiB: 512,
   cpu: 256,
 });
 
-taskDefinition.addContainer("web", {
-  image: ecs.ContainerImage.fromRegistry("nginx"),
+taskDefinition.addContainer('web', {
+  image: ecs.ContainerImage.fromRegistry('nginx'),
   portMappings: [{ containerPort: 80 }],
 });
 
 // Apply your construct to the task definition
-new FargateTaskDefinitionFaultInjection(stack, "TestConstruct", {
+new FargateTaskDefinitionFaultInjection(stack, 'TestConstruct', {
   taskDefinition,
   faultInjectionTypes: [
     FaultInjectionActionType.NETWORK_BLACKHOLE,
@@ -31,7 +31,7 @@ new FargateTaskDefinitionFaultInjection(stack, "TestConstruct", {
 });
 
 // Create the IntegTest
-new IntegTest(app, "IntegTest", {
+new IntegTest(app, 'IntegTest', {
   testCases: [stack],
   // Optional: Configure test options
   // diffAssets: true,

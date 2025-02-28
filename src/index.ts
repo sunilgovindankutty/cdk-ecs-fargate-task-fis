@@ -1,8 +1,8 @@
-import * as cdk from "aws-cdk-lib";
-import * as ecs from "aws-cdk-lib/aws-ecs";
-import * as iam from "aws-cdk-lib/aws-iam";
-import * as logs from "aws-cdk-lib/aws-logs";
-import { Construct } from "constructs";
+import * as cdk from 'aws-cdk-lib';
+import * as ecs from 'aws-cdk-lib/aws-ecs';
+import * as iam from 'aws-cdk-lib/aws-iam';
+import * as logs from 'aws-cdk-lib/aws-logs';
+import { Construct } from 'constructs';
 
 /**
  * Types of fault injection actions that can be performed
@@ -11,32 +11,32 @@ export enum FaultInjectionActionType {
   /**
    * CPU stress test
    */
-  CPU_STRESS = "cpu-stress",
+  CPU_STRESS = 'cpu-stress',
 
   /**
    * IO stress test
    */
-  IO_STRESS = "io-stress",
+  IO_STRESS = 'io-stress',
 
   /**
    * Process termination
    */
-  KILL_PROCESS = "kill-process",
+  KILL_PROCESS = 'kill-process',
 
   /**
    * Network black hole
    */
-  NETWORK_BLACKHOLE = "network-blackhole-port",
+  NETWORK_BLACKHOLE = 'network-blackhole-port',
 
   /**
    * Network latency
    */
-  NETWORK_LATENCY = "network-latency",
+  NETWORK_LATENCY = 'network-latency',
 
   /**
    * Network packet loss
    */
-  NETWORK_PACKET_LOSS = "network-packet-loss",
+  NETWORK_PACKET_LOSS = 'network-packet-loss',
 }
 
 /**
@@ -93,7 +93,7 @@ export class FargateTaskDefinitionFaultInjection extends Construct {
     // Create or use provided log group
     this.logGroup =
       props.logGroup ??
-      new logs.LogGroup(this, "SSMAgentLogs", {
+      new logs.LogGroup(this, 'SSMAgentLogs', {
         logGroupName: `/aws/ecs/fis/${cdk.Stack.of(this).stackName}/${id}`,
         removalPolicy: cdk.RemovalPolicy.DESTROY,
         retention: logs.RetentionDays.ONE_WEEK,
@@ -102,7 +102,7 @@ export class FargateTaskDefinitionFaultInjection extends Construct {
     // Enable fault injection on the task definition
     (
       props.taskDefinition.node.defaultChild as ecs.CfnTaskDefinition
-    ).addPropertyOverride("EnableFaultInjection", true);
+    ).addPropertyOverride('EnableFaultInjection', true);
 
     // Create SSM role and configure permissions
     this.ssmRole = this.createSSMRole();
@@ -139,7 +139,7 @@ export class FargateTaskDefinitionFaultInjection extends Construct {
     // Configure PID mode if needed
     if (needsPidMode) {
       if (cfnTaskDef.pidMode !== ecs.PidMode.TASK) {
-        cfnTaskDef.addPropertyOverride("PidMode", "task");
+        cfnTaskDef.addPropertyOverride('PidMode', 'task');
       }
     }
 
@@ -148,37 +148,37 @@ export class FargateTaskDefinitionFaultInjection extends Construct {
       const networkMode = cfnTaskDef.networkMode;
       if (networkMode === ecs.NetworkMode.BRIDGE) {
         throw new Error(
-          "Network-related fault injection actions cannot be used with bridge network mode. " +
-            "Please use awsvpc, host, or none network mode.",
+          'Network-related fault injection actions cannot be used with bridge network mode. ' +
+            'Please use awsvpc, host, or none network mode.',
         );
       }
     }
   }
 
   private createSSMRole(): iam.Role {
-    const role = new iam.Role(this, "SSMRole", {
-      assumedBy: new iam.ServicePrincipal("ssm.amazonaws.com"),
+    const role = new iam.Role(this, 'SSMRole', {
+      assumedBy: new iam.ServicePrincipal('ssm.amazonaws.com'),
       managedPolicies: [
         iam.ManagedPolicy.fromAwsManagedPolicyName(
-          "AmazonSSMManagedInstanceCore",
+          'AmazonSSMManagedInstanceCore',
         ),
       ],
-      description: "Role used by SSM agent for ECS Fault Injection",
+      description: 'Role used by SSM agent for ECS Fault Injection',
     });
 
     // Add required SSM permissions
     role.addToPolicy(
       new iam.PolicyStatement({
         effect: iam.Effect.ALLOW,
-        actions: ["ssm:DeleteActivation"],
-        resources: ["*"],
+        actions: ['ssm:DeleteActivation'],
+        resources: ['*'],
       }),
     );
 
     role.addToPolicy(
       new iam.PolicyStatement({
         effect: iam.Effect.ALLOW,
-        actions: ["ssm:DeregisterManagedInstance"],
+        actions: ['ssm:DeregisterManagedInstance'],
         resources: [
           `arn:aws:ssm:${cdk.Stack.of(this).region}:*:managed-instance/*`,
         ],
@@ -193,8 +193,8 @@ export class FargateTaskDefinitionFaultInjection extends Construct {
     taskDefinition.taskRole?.addToPrincipalPolicy(
       new iam.PolicyStatement({
         effect: iam.Effect.ALLOW,
-        actions: ["ssm:CreateActivation", "ssm:AddTagsToResource"],
-        resources: ["*"],
+        actions: ['ssm:CreateActivation', 'ssm:AddTagsToResource'],
+        resources: ['*'],
       }),
     );
 
@@ -202,7 +202,7 @@ export class FargateTaskDefinitionFaultInjection extends Construct {
     taskDefinition.taskRole?.addToPrincipalPolicy(
       new iam.PolicyStatement({
         effect: iam.Effect.ALLOW,
-        actions: ["iam:GetRole", "iam:PassRole"],
+        actions: ['iam:GetRole', 'iam:PassRole'],
         resources: [this.ssmRole.roleArn],
       }),
     );
@@ -211,7 +211,7 @@ export class FargateTaskDefinitionFaultInjection extends Construct {
     this.ssmRole.addToPolicy(
       new iam.PolicyStatement({
         effect: iam.Effect.ALLOW,
-        actions: ["logs:CreateLogStream", "logs:PutLogEvents"],
+        actions: ['logs:CreateLogStream', 'logs:PutLogEvents'],
         resources: [this.logGroup.logGroupArn],
       }),
     );
@@ -219,13 +219,13 @@ export class FargateTaskDefinitionFaultInjection extends Construct {
 
   private addSSMAgentContainer(taskDefinition: ecs.FargateTaskDefinition) {
     const logging = new ecs.AwsLogDriver({
-      streamPrefix: "ssm-agent",
+      streamPrefix: 'ssm-agent',
       logGroup: this.logGroup,
     });
 
-    taskDefinition.addContainer("amazon-ssm-agent", {
+    taskDefinition.addContainer('amazon-ssm-agent', {
       image: ecs.ContainerImage.fromRegistry(
-        "public.ecr.aws/amazon-ssm-agent/amazon-ssm-agent:latest",
+        'public.ecr.aws/amazon-ssm-agent/amazon-ssm-agent:latest',
       ),
       essential: false,
       cpu: 0,
@@ -234,8 +234,8 @@ export class FargateTaskDefinitionFaultInjection extends Construct {
         MANAGED_INSTANCE_ROLE_NAME: this.ssmRole.roleName,
       },
       command: [
-        "/bin/bash",
-        "-c",
+        '/bin/bash',
+        '-c',
         `set -e; dnf upgrade -y; dnf install jq procps awscli -y; term_handler() { 
           echo "Deleting SSM activation $ACTIVATION_ID"; 
           if ! aws ssm delete-activation --activation-id $ACTIVATION_ID --region $ECS_TASK_REGION; then 
