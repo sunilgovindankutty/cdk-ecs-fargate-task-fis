@@ -33,7 +33,11 @@ taskDefinition.addContainer('web', {
 // Apply FIS prerequisites to your task definition
 new EcsFargateTaskFis(stack, 'FisConfig', {
   taskDefinition,
-  // Add other configuration options here
+  faultInjectionTypes: [
+    FaultInjectionActionType.NETWORK_BLACKHOLE,
+    FaultInjectionActionType.NETWORK_LATENCY,
+    FaultInjectionActionType.NETWORK_PACKET_LOSS,
+  ]
 });
 ```
 
