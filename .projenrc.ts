@@ -1,17 +1,19 @@
-import { awscdk } from 'projen';
+import { awscdk } from "projen";
 const project = new awscdk.AwsCdkConstructLibrary({
-  author: 'Sunil Govindankutty',
-  authorAddress: 'govisun@amazon.com',
-  cdkVersion: '2.1.0',
-  defaultReleaseBranch: 'main',
-  jsiiVersion: '~5.7.0',
-  name: 'cdk-ecs-fargate-task-fis',
+  author: "Sunil Govindankutty",
+  authorAddress: "sunilkumarg@yahoo.com",
+  cdkVersion: "2.1.0",
+  defaultReleaseBranch: "main",
+  jsiiVersion: "~5.7.0",
+  name: "cdk-ecs-fargate-task-fis",
   projenrcTs: true,
-  repositoryUrl: 'https://github.com/govisun/cdk-ecs-fargate-task-fis.git',
+  repositoryUrl: "https://github.com/govisun/cdk-ecs-fargate-task-fis.git",
 
-  // deps: [],                /* Runtime dependencies of this module. */
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: [],             /* Build dependencies for this module. */
-  // packageName: undefined,  /* The "name" in package.json. */
+  deps: ["aws-cdk-lib", "@aws-cdk/integ-tests-alpha"],
+  devDeps: ["@aws-cdk/integ-tests-alpha"],
+  description:
+    "Helps update the ECS Task definition will all the prerequisites for fault injection with FIS",
+  keywords: ["fis", "ecs fargate", "fault injection"],
+  license: "Apache-2.0"
 });
 project.synth();

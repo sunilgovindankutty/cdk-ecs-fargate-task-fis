@@ -1,5 +1,6 @@
 {
   "name": "cdk-ecs-fargate-task-fis",
+  "description": "Helps update the ECS Task definition will all the prerequisites for fault injection with FIS",
   "repository": {
     "type": "git",
     "url": "https://github.com/govisun/cdk-ecs-fargate-task-fis.git"
@@ -30,21 +31,22 @@
   },
   "author": {
     "name": "Sunil Govindankutty",
-    "email": "govisun@amazon.com",
+    "email": "sunilkumarg@yahoo.com",
     "organization": false
   },
   "devDependencies": {
-    "@stylistic/eslint-plugin": "^2",
+    "@aws-cdk/integ-tests-alpha": "^2.181.1-alpha.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.13.5",
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
-    "aws-cdk-lib": "2.1.0",
     "commit-and-tag-version": "^12",
     "constructs": "10.0.5",
     "eslint": "^9",
+    "eslint-config-prettier": "^10.0.2",
     "eslint-import-resolver-typescript": "^3.8.3",
     "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.2.3",
     "jest": "^29.7.0",
     "jest-junit": "^16",
     "jsii": "~5.7.0",
@@ -52,6 +54,7 @@
     "jsii-docgen": "^10.5.0",
     "jsii-pacmak": "^1.108.0",
     "jsii-rosetta": "~5.7.0",
+    "prettier": "^3.5.2",
     "projen": "^0.91.13",
     "ts-jest": "^29.2.6",
     "ts-node": "^10.9.2",
@@ -61,8 +64,15 @@
     "aws-cdk-lib": "^2.1.0",
     "constructs": "^10.0.5"
   },
+  "dependencies": {
+    "@aws-cdk/integ-tests-alpha": "^2.181.1-alpha.0",
+    "aws-cdk-lib": "^2.181.1"
+  },
   "keywords": [
-    "cdk"
+    "cdk",
+    "ecs fargate",
+    "fault injection",
+    "fis"
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
