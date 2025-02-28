@@ -14,11 +14,5 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'Helps update the ECS Task definition will all the prerequisites for fault injection with FIS',
   keywords: ['fis', 'ecs fargate', 'fault injection'],
   license: 'Apache-2.0',
-  
-  publishToPypi: {
-    distName: 'cdk-ecs-fargate-task-fis',
-    module: 'cdk_ecs_fargate_task_fis',
-  }
-
 });
 project.synth();
