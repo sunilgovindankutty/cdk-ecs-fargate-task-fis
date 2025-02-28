@@ -7,7 +7,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   jsiiVersion: '~5.7.0',
   name: 'cdk-ecs-fargate-task-fis',
   projenrcTs: true,
-  repositoryUrl: 'https://github.com/govisun/cdk-ecs-fargate-task-fis.git',
+  repositoryUrl: 'https://github.com/sunilgovindankutty/cdk-ecs-fargate-task-fis"',
 
   deps: ['aws-cdk-lib', '@aws-cdk/integ-tests-alpha'],
   description:
