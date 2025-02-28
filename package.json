@@ -3,7 +3,7 @@
   "description": "Helps update the ECS Task definition will all the prerequisites for fault injection with FIS",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sunilgovindankutty/cdk-ecs-fargate-task-fis\""
+    "url": "https://github.com/sunilgovindankutty/cdk-ecs-fargate-task-fis"
   },
   "scripts": {
     "build": "npx projen build",
