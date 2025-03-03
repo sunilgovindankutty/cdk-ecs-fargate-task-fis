@@ -13,7 +13,7 @@ npm install cdk-ecs-fargate-task-fis
 ```typescript
 import * as cdk from 'aws-cdk-lib';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
-import { EcsFargateTaskFis } from 'cdk-ecs-fargate-task-fis';
+import { FargateTaskDefinitionFaultInjection, FaultInjectionActionType } from 'cdk-ecs-fargate-task-fis';
 
 const app = new cdk.App();
 const stack = new cdk.Stack(app, 'MyStack');
@@ -31,7 +31,7 @@ taskDefinition.addContainer('web', {
 });
 
 // Apply FIS prerequisites to your task definition
-new EcsFargateTaskFis(stack, 'FisConfig', {
+new FargateTaskDefinitionFaultInjection(stack, 'FisConfig', {
   taskDefinition,
   faultInjectionTypes: [
     FaultInjectionActionType.NETWORK_BLACKHOLE,
