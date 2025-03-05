@@ -2,6 +2,7 @@ import { awscdk } from 'projen';
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Sunil Govindankutty',
   authorAddress: 'sunilkumarg@yahoo.com',
+  majorVersion: 1,
   cdkVersion: '2.1.0',
   defaultReleaseBranch: 'main',
   jsiiVersion: '~5.7.0',
