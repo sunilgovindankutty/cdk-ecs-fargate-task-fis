@@ -37,7 +37,7 @@
   "devDependencies": {
     "@stylistic/eslint-plugin": "^2",
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.15.17",
+    "@types/node": "^22.15.19",
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
     "commit-and-tag-version": "^12",
@@ -52,8 +52,8 @@
     "jsii-docgen": "^10.5.0",
     "jsii-pacmak": "^1.112.0",
     "jsii-rosetta": "~5.7.0",
-    "projen": "^0.92.4",
-    "ts-jest": "^29.3.2",
+    "projen": "^0.92.6",
+    "ts-jest": "^29.3.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
@@ -62,7 +62,7 @@
     "constructs": "^10.0.5"
   },
   "dependencies": {
-    "@aws-cdk/integ-tests-alpha": "^2.195.0-alpha.0",
+    "@aws-cdk/integ-tests-alpha": "^2.196.1-alpha.0",
     "aws-cdk-lib": "^2.181.1"
   },
   "keywords": [
