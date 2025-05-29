@@ -1,6 +1,6 @@
 # CDK ECS Fargate Task FIS
 
-A CDK construct library that helps update Amazon ECS Fargate Task definitions with all the prerequisites required for AWS Fault Injection Simulator (FIS) experiments.
+A CDK construct library that helps update Amazon ECS Fargate Task definitions with all the prerequisites required for AWS Fault Injection Service (FIS) experiments.
 
 ## Installation
 
@@ -48,10 +48,10 @@ new FargateTaskDefinitionFaultInjection(stack, 'FisConfig', {
 
 * Sets up required container configurations
 
-* Ensures compatibility with AWS Fault Injection Simulator
+* Ensures compatibility with AWS Fault Injection Service
 
 
 ## Related Projects
 AWS CDK
 
-AWS Fault Injection Simulator
+AWS Fault Injection Service

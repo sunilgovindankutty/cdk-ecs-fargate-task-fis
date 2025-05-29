@@ -70,7 +70,7 @@ export interface FargateTaskDefinitionFaultInjectionProps {
 
 /**
  * Adds fault injection capability to a Fargate task definition.
- * This enables the ability to run fault injection experiments using AWS Fault Injection Simulator (FIS).
+ * This enables the ability to run fault injection experiments using AWS Fault Injection Service (FIS).
  */
 export class FargateTaskDefinitionFaultInjection extends Construct {
   /**
