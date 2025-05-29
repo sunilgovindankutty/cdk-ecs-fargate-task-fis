@@ -39,10 +39,10 @@
     jsonschema "~1.4.1"
     semver "^7.7.1"
 
-"@aws-cdk/integ-tests-alpha@^2.199.0-alpha.0":
-  version "2.199.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/integ-tests-alpha/-/integ-tests-alpha-2.199.0-alpha.0.tgz#a10fdf12a704d434d6bb4f0d437e3b8b9eca5b2a"
-  integrity sha512-uDe/WcgW4MqI40Zr5EmLw4wz41R9vJMHuc7+b1PdE3iD6ySsbrIs8ERJGk7o/VBUgqdWafFd+CTeI6Cbq7EYFg==
+"@aws-cdk/integ-tests-alpha@2.181.1-alpha.0":
+  version "2.181.1-alpha.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/integ-tests-alpha/-/integ-tests-alpha-2.181.1-alpha.0.tgz#af50f626c5cee247c9c9b6558d4681f74246bfaa"
+  integrity sha512-PS+RZE5ca+P6Z6rdiz1JWiDDBgVPzYg60qE8PFkDbltpYxp/sHZBTeGF5hGDetogiG3xFbZ7cc+F8ZctZiqCSg==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.27.1":
   version "7.27.1"

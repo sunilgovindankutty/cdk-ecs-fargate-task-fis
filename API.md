@@ -152,6 +152,7 @@ const fargateTaskDefinitionFaultInjectionProps: FargateTaskDefinitionFaultInject
 | <code><a href="#cdk-ecs-fargate-task-fis.FargateTaskDefinitionFaultInjectionProps.property.taskDefinition">taskDefinition</a></code> | <code>aws-cdk-lib.aws_ecs.FargateTaskDefinition</code> | The task definition to enable fault injection on. |
 | <code><a href="#cdk-ecs-fargate-task-fis.FargateTaskDefinitionFaultInjectionProps.property.faultInjectionTypes">faultInjectionTypes</a></code> | <code><a href="#cdk-ecs-fargate-task-fis.FaultInjectionActionType">FaultInjectionActionType</a>[]</code> | The types of fault injection actions that will be used This helps configure the task definition appropriately. |
 | <code><a href="#cdk-ecs-fargate-task-fis.FargateTaskDefinitionFaultInjectionProps.property.logGroup">logGroup</a></code> | <code>aws-cdk-lib.aws_logs.ILogGroup</code> | Optional custom log group for the SSM agent container. |
+| <code><a href="#cdk-ecs-fargate-task-fis.FargateTaskDefinitionFaultInjectionProps.property.ssmRole">ssmRole</a></code> | <code>aws-cdk-lib.aws_iam.Role</code> | Optional external SSM role to use for fault injection. |
 
 ---
 
@@ -190,6 +191,19 @@ public readonly logGroup: ILogGroup;
 - *Default:* A new log group will be created
 
 Optional custom log group for the SSM agent container.
+
+---
+
+##### `ssmRole`<sup>Optional</sup> <a name="ssmRole" id="cdk-ecs-fargate-task-fis.FargateTaskDefinitionFaultInjectionProps.property.ssmRole"></a>
+
+```typescript
+public readonly ssmRole: Role;
+```
+
+- *Type:* aws-cdk-lib.aws_iam.Role
+- *Default:* A new SSM role will be created
+
+Optional external SSM role to use for fault injection.
 
 ---
 
