@@ -6,7 +6,7 @@
 
 Adds fault injection capability to a Fargate task definition.
 
-This enables the ability to run fault injection experiments using AWS Fault Injection Simulator (FIS).
+This enables the ability to run fault injection experiments using AWS Fault Injection Service (FIS).
 
 #### Initializers <a name="Initializers" id="cdk-ecs-fargate-task-fis.FargateTaskDefinitionFaultInjection.Initializer"></a>
 
