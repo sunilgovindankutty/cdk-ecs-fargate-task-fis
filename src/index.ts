@@ -60,6 +60,12 @@ export interface FargateTaskDefinitionFaultInjectionProps {
    * @default - A new log group will be created
    */
   readonly logGroup?: logs.ILogGroup;
+  
+  /**
+   * Optional external SSM role to use for fault injection
+   * @default - A new SSM role will be created
+   */
+  readonly ssmRole?: iam.Role;
 }
 
 /**
@@ -104,8 +110,8 @@ export class FargateTaskDefinitionFaultInjection extends Construct {
       props.taskDefinition.node.defaultChild as ecs.CfnTaskDefinition
     ).addPropertyOverride('EnableFaultInjection', true);
 
-    // Create SSM role and configure permissions
-    this.ssmRole = this.createSSMRole();
+    // Use provided SSM role or create a new one
+    this.ssmRole = props.ssmRole ?? this.createSSMRole();
     this.configurePermissions(props.taskDefinition);
     this.addSSMAgentContainer(props.taskDefinition);
   }

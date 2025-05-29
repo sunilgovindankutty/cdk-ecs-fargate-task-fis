@@ -1,6 +1,7 @@
 import * as cdk from 'aws-cdk-lib';
 import { Template, Match } from 'aws-cdk-lib/assertions';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
+import * as iam from 'aws-cdk-lib/aws-iam';
 import {
   FargateTaskDefinitionFaultInjection,
   FaultInjectionActionType,
@@ -91,6 +92,59 @@ describe('FargateTaskDefinitionFaultInjection', () => {
           'Fn::Join': Match.anyValue(),
         },
       ]),
+    });
+  });
+
+  test('External IAM Role Used', () => {
+    // GIVEN
+    const externalRole = new iam.Role(stack, 'ExternalSSMRole', {
+      assumedBy: new iam.ServicePrincipal('ssm.amazonaws.com'),
+      description: 'External SSM role for testing',
+    });
+
+    // WHEN
+    const faultInjection = new FargateTaskDefinitionFaultInjection(stack, 'FaultInjectionWithExternalRole', {
+      taskDefinition: taskDefinition,
+      faultInjectionTypes: [FaultInjectionActionType.CPU_STRESS],
+      ssmRole: externalRole,
+    });
+
+    // THEN
+    expect(faultInjection.ssmRole).toBe(externalRole);
+    
+    const template = Template.fromStack(stack);
+    
+    // Verify the SSM agent container uses the external role
+    template.hasResourceProperties('AWS::ECS::TaskDefinition', {
+      ContainerDefinitions: Match.arrayWith([
+        Match.objectLike({
+          Name: 'amazon-ssm-agent',
+          Environment: Match.arrayWith([
+            {
+              Name: 'MANAGED_INSTANCE_ROLE_NAME',
+              Value: externalRole.roleName,
+            },
+          ]),
+        }),
+      ]),
+    });
+    
+    // Verify task role has permission to pass the external role
+    template.hasResourceProperties('AWS::IAM::Policy', {
+      PolicyDocument: {
+        Statement: Match.arrayWith([
+          Match.objectLike({
+            Action: ['iam:GetRole', 'iam:PassRole'],
+            Effect: 'Allow',
+            Resource: {
+              'Fn::GetAtt': [
+                Match.stringLikeRegexp('ExternalSSMRole'),
+                'Arn',
+              ],
+            },
+          }),
+        ]),
+      },
     });
   });
 });
