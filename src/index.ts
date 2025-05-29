@@ -60,7 +60,7 @@ export interface FargateTaskDefinitionFaultInjectionProps {
    * @default - A new log group will be created
    */
   readonly logGroup?: logs.ILogGroup;
-  
+
   /**
    * Optional external SSM role to use for fault injection
    * @default - A new SSM role will be created
