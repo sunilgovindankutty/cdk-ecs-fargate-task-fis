@@ -4,6 +4,8 @@
 
 ### FargateTaskDefinitionFaultInjection <a name="FargateTaskDefinitionFaultInjection" id="cdk-ecs-fargate-task-fis.FargateTaskDefinitionFaultInjection"></a>
 
+- *Implements:* constructs.IConstruct, constructs.IDependable
+
 Adds fault injection capability to a Fargate task definition.
 
 This enables the ability to run fault injection experiments using AWS Fault Injection Service (FIS).
